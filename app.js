@@ -1,16 +1,21 @@
 // Importing express module
 const express = require('express');
 const app = express();
- 
+const mongoose=require('mongoose')
+
+
+
+mongoose.connect(`mongodb+srv://sid:sid@cluster0.u4tog.mongodb.net/projectsList?retryWrites=true&w=majority`,{useNewUrlParser: true})
+const db=mongoose.connection
+db.on('error',(error)=>console.log(error))
+db.once('open',()=>console.log('connected to databases'))
+
+
+app.use(express.json())
+
 // Getting Request
-app.get('/', (req, res) => {
- 
-    // Sending the response
-    res.send('Hello World!')
-    
-    // Ending the response
-    res.end()
-})
+const projectsRouter= require('./routes/projects')
+app.use('/',projectsRouter)
  
 // Establishing the port
 const PORT = process.env.PORT ||5000;
