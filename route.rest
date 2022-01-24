@@ -1,0 +1,25 @@
+GET http://localhost:3000/projects
+
+###
+GET http://localhost:3000/projects/61eac957c59cf41562d1fdeb
+
+
+###
+POST http://localhost:3000/projects
+Content-Type: application/json
+
+{
+    "name": "CHAT APP",
+    "description":"this is awsome project"
+}
+
+###
+DELETE http://localhost:3000/projects/61ebdadfcebb2ca1211ed74f
+
+###
+PATCH  http://localhost:3000/projects/61ebdb21cebb2ca1211ed753
+Content-Type: application/json
+
+{
+    "name":"mern website"
+}
