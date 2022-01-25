@@ -5,6 +5,11 @@ const mongoose=require('mongoose')
 
 const fileUpload= require('express-fileupload')
 
+// enable cors
+const cors = require('cors');
+app.use(cors({ origin: true }));
+
+
 mongoose.connect(`mongodb+srv://sid:sid@cluster0.u4tog.mongodb.net/projectsList?retryWrites=true&w=majority`,{useNewUrlParser: true})
 const db=mongoose.connection
 db.on('error',(error)=>console.log(error))
