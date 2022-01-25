@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cloudinary": "^1.28.1",
     "express": "^4.17.2",
+    "express-fileupload": "^1.2.1",
     "mongoose": "^6.1.7"
   },
   "devDependencies": {

@@ -1,15 +1,14 @@
-GET http://localhost:3000/projects
+GET http://localhost:5000/
 
 ###
-GET http://localhost:3000/projects/61eac957c59cf41562d1fdeb
+GET http://localhost:5000/projects/61eac957c59cf41562d1fdeb
 
 
 ###
-POST http://localhost:3000/projects
+POST https://siddhesh-api.herokuapp.com/
 Content-Type: application/json
-
 {
-    "name": "CHAT APP",
+    "name": "mern",
     "description":"this is awsome project"
 }
 

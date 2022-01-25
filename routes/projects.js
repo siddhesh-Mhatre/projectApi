@@ -2,6 +2,16 @@ const express = require("express");
 const router = express.Router();
 const Project = require("../models/project");
 
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({ 
+  cloud_name: 'dghti3rmh', 
+  api_key: '969663222442525', 
+  api_secret: 'j_26FBNLfLgvHWNdbyZ6airrfOs',
+  secure: true
+});
+
+
 //getting all
 
 router.get("/", async (req, res) => {
@@ -20,9 +30,16 @@ router.get("/:id", getProjects,(req, res) => {
 
 //cerateing one
 router.post("/", async (req, res) => {
+
+  const file = req.files.photo;
+  await cloudinary.uploader.upload(file.tempFilePath,async (err,result)=>{
+    console.log(result);
+
+/* --------- */
   const project = new Project({
     name: req.body.name,
     description: req.body.description,
+    imagePath:result.url
   });
   try {
     const newProject = await project.save();
@@ -30,6 +47,13 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(400).json({message:err.message});
   }
+
+/* --------- */
+
+
+  })
+ 
+
 });
 
 //updateing one
