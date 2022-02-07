@@ -13,10 +13,17 @@ const projectSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    projectDate:{
-        type:Date,
-        required:true,
-        default:Date.now
+    link: {
+        type:  {},
+        required: true
+    },
+    categourey:{
+        type:String,
+        required:true
+    },
+    technology:{
+        type:String,
+        required:true
     },
 
 })

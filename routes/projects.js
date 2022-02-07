@@ -24,12 +24,12 @@ router.get("/", async (req, res) => {
 });
 
 //getting one
-router.get("/:id", getProjects,(req, res) => {
+router.get("/:id",(req, res) => {
   res.send(res.project);
 });
 
 //cerateing one
-router.post("/", async (req, res) => {
+router.post("/",getProjects,async (req, res) => {
 
   const file = req.files.photo;
   await cloudinary.uploader.upload(file.tempFilePath,async (err,result)=>{
@@ -39,7 +39,10 @@ router.post("/", async (req, res) => {
   const project = new Project({
     name: req.body.name,
     description: req.body.description,
-    imagePath:result.url
+    imagePath:result.url,
+    link:req.body.link,
+    categourey:req.body.categourey,
+    technology:req.body.technology
   });
   try {
     const newProject = await project.save();
@@ -57,13 +60,17 @@ router.post("/", async (req, res) => {
 });
 
 //updateing one
-router.patch("/:id", getProjects,async(req, res) => {
+router.patch("/:id/:pass?", getProjects,async(req, res) => {
     if(req.body.name !=null){
         res.project.name = req.body.name
     }
     if(req.body.description !=null){
         res.project.description = req.body.description
     }
+
+    if(req.body.link !=null){
+      res.project.link = req.body.link
+  }
     try{
      const upadtedProject= await res.project.save()
      res.json(upadtedProject)
@@ -74,7 +81,7 @@ router.patch("/:id", getProjects,async(req, res) => {
 });
 
 //deleteing one
-router.delete("/:id",getProjects,async(req, res) => {
+router.delete("/:id/:pass?",getProjects,async(req, res) => {
  try{
   await res.project.remove()
   res.json({message:'deleted project'})
@@ -85,12 +92,23 @@ router.delete("/:id",getProjects,async(req, res) => {
 });
 
 async function getProjects(req,res,next){
+ 
  let project
+ 
+ 
+ 
  try{
-   project = await Project.findById(req.params.id)
-   if(project==null){
-       return res.status(404).json({message:'Cannot find subscriber'})
+   if(req.params.pass==="siddhesh"){
+
+    project = await Project.findById(req.params.id)
+    if(project==null){
+        return res.status(404).json({message:'Cannot find Project'})
+    }
    }
+   else{
+    return res.status(404).json({message:'updation deny :('})
+   }
+
  }
  catch(err){
     return res.status(500).json({message:err.message})
