@@ -13,10 +13,10 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:5000/61f91d27e06914f9e481c5e1/siddhesh
+DELETE https://siddhesh-api.herokuapp.com/61f91d27e06914f9e481c5e1/siddhesh
 
 ###
-PATCH  http://localhost:5000/61f919f59964e9e99e2a66d4
+PATCH  https://siddhesh-api.herokuapp.com/61f91d27e06914f9e481c5e1/siddhesh
 Content-Type: application/json
 
 {

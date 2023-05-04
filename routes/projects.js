@@ -29,7 +29,7 @@ router.get("/:id",(req, res) => {
 });
 
 //cerateing one
-router.post("/",getProjects,async (req, res) => {
+router.post("/",async (req, res) => {
 
   const file = req.files.photo;
   await cloudinary.uploader.upload(file.tempFilePath,async (err,result)=>{
